@@ -52,6 +52,79 @@
     float: left;
 }
 
+.tbl-full {
+    width: 100%; /* Ensures the table takes the full width of the container */
+    border-collapse: collapse; /* Removes spacing between table cells */
+    margin: 2% 0; /* Adds some margin for spacing */
+    text-align: left; /* Aligns text to the left in table cells */
+}
+
+.tbl-full th, .tbl-full td {
+    border: 1px solid #ff4757; 
+    padding: 1%; 
+    color: #2d3436; 
+}
+
+.tbl-full th {
+    background-color: #ff4757; 
+    color: white; 
+    text-align: center; /* Default for other cells */
+}
+
+.tbl-full th:last-child {
+    width: 200px;
+}
+
+.tbl-full td {
+    position: relative;
+    text-align: center; /* Default for other cells */
+}
+
+.tbl-full td:last-child {
+    display: flex;
+    width: 200px;
+    justify-content:center; /* Aligns the content to the right */
+    gap: 5px; /* Adds spacing between buttons */
+    padding: 10px;
+}
+
+.btn-success{
+    background-color: #00d118;
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+    font-size: larger;
+    padding: 10px;
+    margin-left: 91%;
+}
+
+.btn-secondary {
+    background-color: #009dff;
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 0 5px; /* Adds horizontal spacing between buttons */
+}
+
+.btn-danger {
+    background-color: #ff1629;
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 0; /* Removes unnecessary left margin */
+}
+
+
+.tbl-30{
+    width: 30%;
+    margin: 0 auto;
+    padding: 2%;
+}
+
+
+
 .footer{
     background-color: #ff4757;
     color: white;
