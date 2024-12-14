@@ -16,6 +16,13 @@ include("Partials/Navigation.php");
                 unset($_SESSION['add']);
                 
             }
+
+            if(isset($_SESSION['delete']))
+            {
+                echo $_SESSION['delete'];
+                unset($_SESSION['delete']);
+                
+            }
             
             ?>
 
@@ -28,8 +35,8 @@ include("Partials/Navigation.php");
                 <tr>
                     <th>Admin-ID</th>
                     <th>Full-Name</th>
-                    <th>UserName</th>
-                    <th>Email</th>
+                    <th>User-Name</th>
+                    <th>E-mail</th>
                     <th>Actions</th>
                 </tr>
 
@@ -47,52 +54,41 @@ include("Partials/Navigation.php");
                     $count = mysqli_num_rows($result); // Function to get all the rows in database
 
                     //Check Number of Rows
+                    $sn = 1;
                     if ($count>0){
 
                         // There is Data in Database
-
                         while($rows = mysqli_fetch_assoc($result)){
 
-                            // Using While Loop to get all the Data from Database.
-
+                        // Using While Loop to get all the Data from Database.
                     //Variabel Name     Column Name in Database
                             $id = $rows['ID'];
                             $first_name = $rows['First_Name'];
                             $last_name = $rows['Last_Name'];
                             $username = $rows['User_Name'];
                             $email = $rows['Email'];
-
+                            
                             // Display the Values in our Table
                             ?>
                             <tr>
-                                <td><?php echo($id) ?></td>
+                                <td><?php echo($sn++) ?></td>
                                 <td><?php echo($first_name." ".$last_name) ?></td>
                                 <td><?php echo($username) ?></td>
-                                <td><?php echo($email) ?></td>
-
-                                
+                                <td><?php echo($email) ?></td> 
                                 <td>
                                 <a href="#" class="btn-secondary"><i class="fa-solid fa-pen"></i></a>
-                                <a href="#" class="btn-danger"><i class="fa-regular fa-trash-can"></i></a>
+                                <a href="<?php echo HOMEURL; ?>Admin/Delete-admin.php?ID=<?php echo $id;?>" class="btn-danger"><i class="fa-regular fa-trash-can"></i></a>
                                 </td>
                             </tr>
                             <?php
-
-
                         }
                     }
-
                     else{
-
                         // There is No Data in Database
-
                     }
-
                 } 
-                
-                ?>
-
-            </table>
+            ?>
+        </table>
 
         </div>
     </div>
