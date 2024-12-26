@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
     $confirm_password = md5($_POST['confirm_password']);
     
     // Create SQL Query to Update Admin
-    $sql = "SELECT * FROM tbl_admin WHERE ID=$id AND Password='$current_password'"
+    $sql = "SELECT * FROM tbl_admin WHERE ID=$id AND Password='$current_password'";
 
     // Execute the Query
     $result = mysqli_query($conn, $sql);
