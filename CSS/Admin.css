@@ -107,6 +107,16 @@
     margin: 0 5px; /* Adds horizontal spacing between buttons */
 }
 
+.btn-grey {
+    background-color: #929292;
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 0 5px; /* Adds horizontal spacing between buttons */
+}
+
+
 .btn-danger {
     background-color: #ff1629;
     text-decoration: none;

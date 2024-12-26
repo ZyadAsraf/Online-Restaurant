@@ -23,6 +23,13 @@ include("Partials/Navigation.php");
                 unset($_SESSION['delete']);
                 
             }
+
+            if(isset($_SESSION['update']))
+            {
+                echo $_SESSION['update'];
+                unset($_SESSION['update']);
+                
+            }
             
             ?>
 
@@ -76,11 +83,12 @@ include("Partials/Navigation.php");
                                 <td><?php echo($username) ?></td>
                                 <td><?php echo($email) ?></td> 
                                 <td>
-                                <a href="#" class="btn-secondary"><i class="fa-solid fa-pen"></i></a>
+                                <a href="<?php echo HOMEURL; ?>Admin/Update-Password-admin.php?ID=<?php echo $id;?>" class="btn-grey"><i class="fa-solid fa-key" style="color: #FFD43B;"></i></a>
+                                <a href="<?php echo HOMEURL; ?>Admin/Update-admin.php?ID=<?php echo $id;?>" class="btn-secondary"><i class="fa-solid fa-pen"></i></a>
                                 <a href="<?php echo HOMEURL; ?>Admin/Delete-admin.php?ID=<?php echo $id;?>" class="btn-danger"><i class="fa-regular fa-trash-can"></i></a>
                                 </td>
                             </tr>
-                            <?php
+                            <?php   
                         }
                     }
                     else{
