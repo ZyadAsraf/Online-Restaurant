@@ -48,7 +48,7 @@ include("Partials/Navigation.php");
 
                 <tr>
                     <td colspan="2">
-                        <input type="submit" name="submit" value="Save" class=".btn-secondary">
+                        <input type="submit" name="submit" value="Save">
                     </td>
                 </tr>
 

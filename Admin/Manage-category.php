@@ -8,7 +8,22 @@ include("Partials/Navigation.php");
             <h1>Manage-Categories</h1>
             <br><br>
 
-            <a href="#" class="btn-success">Add Categ</a>
+            <?php
+            if(isset($_SESSION['add']))
+            {
+                echo $_SESSION['add'];
+                unset($_SESSION['add']);
+            }
+
+            if(isset($_SESSION['uplode']))
+            {
+                echo $_SESSION['uplode'];
+                unset($_SESSION['uplode']);
+            }
+
+            ?>
+
+            <a href="Add-category.php" class="btn-success">Add Categ</a>
 
 
             <table class="tbl-full">
