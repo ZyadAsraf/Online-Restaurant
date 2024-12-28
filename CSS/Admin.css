@@ -143,3 +143,14 @@
     background-color: #ff4757;
     color: white;
 }
+
+
+/* Style for the Login Page */
+
+.login{
+    border: 1px solid #ff4757;
+    width: 20%;
+    margin: 10% auto;
+    padding: 2%;
+    border-radius: 3px;
+}
