@@ -46,8 +46,9 @@
 </div>
 
 <?php
+// Check if the submit button is clicked or not
 if (isset($_POST['submit'])) {
-    // Get all The data from the Update
+    // Get all The data from the Form
     $id = $_POST['id'];
     $current_password = md5($_POST['current_password']);
     $new_password = md5($_POST['new_password']);
@@ -65,10 +66,40 @@ if (isset($_POST['submit'])) {
         $count = mysqli_num_rows($result);
 
         if($count==1){
-            echo"User found";
+            // User Exists and Password Can be Changed
+            // Check if the New Password and Confirm Password Match
+            if($new_password==$confirm_password){
+                // Update Password
+                $sql2 = "UPDATE tbl_admin SET
+                    Password = '$new_password'
+                    WHERE ID = $id
+                ";
+
+                // Execute the Query
+                $result2 = mysqli_query($conn, $sql2);
+
+                // Check if the Query is Executed Successfully
+                if ($result2 == true) {
+                    // Display Success Message
+                    $_SESSION['change-password'] = "<div style='color: green;'><h3><strong>Password Changed Successfully!</strong></h3></div>";
+                    header('location:'.HOMEURL.'admin/manage-admin.php');
+                }
+                else{
+                     // Redirect to Manage Admin Page with error message
+                    $_SESSION['change-password'] = "<div style='color: red;'><h3><strong>Failed to Change Password!</strong></h3></div>";
+                    header('location:'.HOMEURL.'admin/manage-admin.php');
+                }
+            }
+            else{
+                // Redirect to Manage Admin Page with error message
+                $_SESSION['password-not-matched'] = "<div style='color: red;'><h3><strong>Password Did Not Match!</strong></h3></div>";
+                header('location:'.HOMEURL.'admin/manage-admin.php');
+            }
         }
         else{
-            $_SESSION['user-not-found'] = "<div class='error'> User Not Found. </div>";
+            // Redirect to Manage Admin Page with error message
+            $_SESSION['user-not-found'] = "<div style='color: red;'><h3><strong>User Not Found!</strong></h3></div>";
+            header('location:'.HOMEURL.'admin/manage-admin.php');
         }
     }
 

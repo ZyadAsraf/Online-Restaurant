@@ -148,9 +148,10 @@
 /* Style for the Login Page */
 
 .login{
-    border: 1px solid #ff4757;
+    border: 8px solid #ff4757;
     width: 20%;
     margin: 10% auto;
     padding: 2%;
-    border-radius: 3px;
+    border-radius: 10px;
+    box-shadow: #d63031 6px 6px 2px;
 }
