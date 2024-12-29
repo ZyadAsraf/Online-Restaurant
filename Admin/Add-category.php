@@ -152,6 +152,7 @@ if(isset($_POST['submit']))
         // Create a Session Variable to Display Message
         $_SESSION['add'] = "<div style=\"color: green\"><strong>Category Added Successfully</strong></div>";
 
+        
         // Redirect to Manage Category Page
         header("location:".HOMEURL.'admin/Manage-category.php');
 

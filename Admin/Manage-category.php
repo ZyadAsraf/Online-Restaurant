@@ -64,6 +64,12 @@ include("Partials/Navigation.php");
             echo $_SESSION['upload'];
             unset($_SESSION['upload']);
         }
+
+        if (isset($_SESSION['delete'])) {
+            echo $_SESSION['delete'];
+            unset($_SESSION['delete']);
+        }
+
         ?>
 
         <a href="Add-category.php" class="btn-success">Add Categ</a>
@@ -116,8 +122,9 @@ include("Partials/Navigation.php");
                             <td><?php echo $featured; ?></td>
                             <td><?php echo $active; ?></td>
                             <td>
-                                <a href="#" class="btn-secondary">Edit</a>
-                                <a href="#" class="btn-danger">Delete</a>
+                                <a href="#" class="btn-secondary"><i class="fa-solid fa-pen"></i></a>
+                                <a href="<?php echo HOMEURL; ?>admin/Delete-category.php?ID=<?php echo $id; ?>" class="btn-danger"><i class="fa-regular fa-trash-can"></i></a>
+
                             </td>
                         </tr>
                         <?php
