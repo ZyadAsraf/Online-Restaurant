@@ -8,7 +8,7 @@ define('HOMEURL', 'http://localhost/Online-Restaurant/');
 define('LOCALHOST', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'online restaurant system');
+define('DB_NAME', 'online_restaurant');
 
 
 // Execute the Query and Save Data in Database
