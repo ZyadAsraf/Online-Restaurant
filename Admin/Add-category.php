@@ -100,7 +100,8 @@ if(isset($_POST['submit']))
         {
             // Auto Rename Image
             // Get the extension of the image
-            $ext = end(explode('.', $image_name));
+            $temp = explode('.', $image_name);
+            $ext = end($temp);
 
             // Rename the Image
             $image_name = "Food_Category_".rand(000, 999).'.'.$ext;
