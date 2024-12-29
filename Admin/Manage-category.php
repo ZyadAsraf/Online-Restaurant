@@ -70,6 +70,11 @@ include("Partials/Navigation.php");
             unset($_SESSION['delete']);
         }
 
+        if (isset($_SESSION['update'])) {
+            echo $_SESSION['update'];
+            unset($_SESSION['update']);
+        }
+
         ?>
 
         <a href="Add-category.php" class="btn-success">Add Categ</a>
@@ -122,7 +127,7 @@ include("Partials/Navigation.php");
                             <td><?php echo $featured; ?></td>
                             <td><?php echo $active; ?></td>
                             <td>
-                                <a href="#" class="btn-secondary"><i class="fa-solid fa-pen"></i></a>
+                                <a href="<?php echo HOMEURL; ?>admin/Update-category.php?ID=<?php echo $id; ?>" class="btn-secondary"><i class="fa-solid fa-pen"></i></a>
                                 <a href="<?php echo HOMEURL; ?>admin/Delete-category.php?ID=<?php echo $id; ?>" class="btn-danger"><i class="fa-regular fa-trash-can"></i></a>
 
                             </td>
