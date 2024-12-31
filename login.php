@@ -1,4 +1,4 @@
-<?php include("../Config/Constant.php");?>
+<?php include("Config/Constant.php");?>
 
 <html>
 <head>
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
     $password = md5($_POST['password']);
 
     // SQL Query to check if the user email and password exists or not
-    $sql = "SELECT * FROM tbl_admin WHERE Email = '$email' AND Password = '$password'";
+    $sql = "SELECT * FROM customer WHERE Email = '$email' AND Password = '$password'";
 
     // Execute the Query
     $result = mysqli_query($conn, $sql);
@@ -61,11 +61,11 @@ if (isset($_POST['submit'])) {
         $_SESSION['login'] = "<div style='color: green;'><h2><strong>Welcome Back!</h2></strong></div>";
         
         $_SESSION['email'] = $email; // To check whether the user is logged in or not and logout will unset it
-        $_SESSION['role'] = "admin"; // Set the user role
-        header("location:".HOMEURL.'admin/');
+        $_SESSION['role'] = "customer"; // Set the user role
+        header("location:".HOMEURL.'index.php');
     } else {
         $_SESSION['login'] = "<div style='color: red;'><h3><strong>E-mail or Password is incorrect!</strong></h3></div>";
-        header("location:".HOMEURL.'admin/Login.php');
+        header("location:".HOMEURL.'login.php');
     }
 }
 

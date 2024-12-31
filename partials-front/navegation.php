@@ -38,6 +38,9 @@ include('Config/Constant.php')
                     <li>
                         <a href="#">Contact</a>
                     </li>
+                    <li>
+                        <a href="<?php echo HOMEURL; ?>Logout.php">Log out</a>
+                    </li>
                 </ul>
             </div>
 
