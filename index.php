@@ -94,7 +94,7 @@ include('partials-front/navegation.php');
                             </p>
                             <br>
 
-                            <a href="order.html" class="btn btn-primary">Order Now</a>
+                            <a href="<?php echo HOMEURL; ?>order.php?ID=<?php echo $id;?>" class="btn btn-primary">Order Now</a>
                         </div>
                     </div>
 
