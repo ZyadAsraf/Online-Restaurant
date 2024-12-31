@@ -61,6 +61,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['login'] = "<div style='color: green;'><h2><strong>Welcome Back!</h2></strong></div>";
         
         $_SESSION['email'] = $email; // To check whether the user is logged in or not and logout will unset it
+        $_SESSION['UID'] = $row['ID'];
         $_SESSION['role'] = "admin"; // Set the user role
         header("location:".HOMEURL.'admin/');
     } else {

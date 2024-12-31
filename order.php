@@ -39,7 +39,7 @@ if (isset($_GET['ID'])) {
     <!-- fOOD sEARCH Section Starts Here -->
     <section class="food-search">
         <div class="container">
-            <form action="#" class="order">
+            <form action="" method="POST">
                 <fieldset>
                     <legend>Selected Food</legend>
 
@@ -50,37 +50,57 @@ if (isset($_GET['ID'])) {
                     <div class="food-menu-desc">
                         <h3><?php echo htmlspecialchars($product['name']);?></h3>
                         <p class="food-price">£<?php echo htmlspecialchars($product['price'])?></p>
-
+                        <p class="food-detail">
+                            <?php echo htmlspecialchars($product['description'])?>
                         <div class="order-label">Quantity</div>
-                        <input type="number" name="qty" class="input-responsive" value="1" required>
-                        <p class="food-description"><?php echo htmlspecialchars($product['description'])?></p>
+                        <input type="number" name="quantity" class="input-responsive" value="1" required>
+                        
                     </div>
-
-                </fieldset>
-                
-                <fieldset>
-                    <legend>Delivery Details</legend>
-                    <div class="order-label">Full Name</div>
-                    <input type="text" name="full-name" placeholder="E.g. Vijay Thapa" class="input-responsive" required>
-
-                    <div class="order-label">Phone Number</div>
-                    <input type="tel" name="contact" placeholder="E.g. 9843xxxxxx" class="input-responsive" required>
-
-                    <div class="order-label">Email</div>
-                    <input type="email" name="email" placeholder="E.g. hi@vijaythapa.com" class="input-responsive" required>
-
-                    <div class="order-label">Address</div>
-                    <textarea name="address" rows="10" placeholder="E.g. Street, City, Country" class="input-responsive" required></textarea>
-
+                    <input type="hidden" name="item_id" value="<?php echo $id; ?>" required>
+                    <input type="hidden" name="customer" value="<?php echo $_SESSION['UID']; ?>" required>
                     <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary">
                 </fieldset>
-
+                
             </form>
-
+            
         </div>
     </section>
     <!-- fOOD sEARCH Section Ends Here -->
+    <?php
 
+// Check if the submit button is clicked
+if (isset($_POST['submit'])) {
+    
+
+    // Get the data from the form
+    $item_id = $_POST['item_id'];
+    $quantity = $_POST['quantity'];
+    $total = $product['price'] * $quantity;
+    $date = date('Y-m-d H:i:s');
+    $status = "pending";
+    $customer_id = $_POST['customer'];
+
+    // Execute the Query
+    $sql2 = "INSERT INTO `order` SET
+                Item_ID = '$item_id',
+                Quantity = '$quantity',
+                Total = '$total',
+                Order_Date = '$date',
+                Status = '$status',
+                Customer_ID = '$customer_id'";
+
+            $result2 = mysqli_query($conn, $sql2);
+
+            if ($result2) {
+                $_SESSION['add'] = "<div style='color: green;'>Order placed Successfully.</div>";
+                header("location:" . HOMEURL . "order.php?ID=$id");
+            } else {
+                $_SESSION['add'] = "<div style='color: red;'>Failed to place order.</div>";
+                header("location:" . HOMEURL . "order.php?ID=$id");
+            }
+}
+
+?>
     <?php
 include('partials-front/footer.php')
 ?>

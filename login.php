@@ -58,10 +58,14 @@ if (isset($_POST['submit'])) {
     $count = mysqli_num_rows($result);
 
     if ($count == 1) {
-        $_SESSION['login'] = "<div style='color: green;'><h2><strong>Welcome Back!</h2></strong></div>";
+        // Fetch the user data
+        $row = mysqli_fetch_assoc($result);
         
-        $_SESSION['email'] = $email; // To check whether the user is logged in or not and logout will unset it
+        $_SESSION['login'] = "<div style='color: green;'><h2><strong>Welcome Back!</h2></strong></div>";
+        $_SESSION['UID'] = $row['ID']; // Save the user ID in session
+        $_SESSION['email'] = $email; // Save the email in session
         $_SESSION['role'] = "customer"; // Set the user role
+
         header("location:".HOMEURL.'index.php');
     } else {
         $_SESSION['login'] = "<div style='color: red;'><h3><strong>E-mail or Password is incorrect!</strong></h3></div>";

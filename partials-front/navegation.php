@@ -36,7 +36,7 @@ include('Config/Constant.php')
                         <a href="<?php echo HOMEURL; ?>foods.php">Foods</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="<?php echo HOMEURL; ?>myorders.php">My orders</a>
                     </li>
                     <li>
                         <a href="<?php echo HOMEURL; ?>Logout.php">Log out</a>
