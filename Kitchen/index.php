@@ -46,6 +46,7 @@ include("Partials/Navigation.php");
     width: 90%;
     margin: auto;
 }
+
 </style>
 
 <div class="main-content">
@@ -77,22 +78,28 @@ include("Partials/Navigation.php");
 
         ?>
 
-        <a href="Add-category.php" class="btn-success">Add Categ</a>
-        <br><br>
-
+        <div id="clock" style="font-size: 24px; font-weight: bold;"></div>
+        
         <table class="tbl-full">
             <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Image</th>
-                <th>Featured</th>
-                <th>Active</th>
+                <th>Order ID</th>
+                <th>Item name</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Order Date</th>
+                <th>Status</th>
+                <th>Customer Name</th>
                 <th>Actions</th>
             </tr>
 
             <?php
             // Query to get all categories from database
-            $sql = "SELECT * FROM order";
+            $sql = "SELECT orders.*, customer.First_Name AS customer_firstname, customer.Last_Name AS customer_lastname, item.title AS item_name
+                FROM orders
+                LEFT JOIN customer ON orders.Customer_ID = customer.ID
+                LEFT JOIN item ON orders.Item_ID = item.ID
+                WHERE orders.Status != 'Delivered' AND orders.Status != 'Cancelled'
+                ORDER BY orders.Order_Date DESC";
 
             // Execute the query
             $result = mysqli_query($conn, $sql);
@@ -106,48 +113,85 @@ include("Partials/Navigation.php");
                     // Loop through and display categories
                     while ($row = mysqli_fetch_assoc($result)) {
                         $id = $row['ID'];
-                        $item_id = $row['Item_ID'];
+                        $item_name = $row['item_name'];
                         $total = $row['Total'];
                         $order_date = $row['Order_Date'];
                         $status = $row['Status'];
-                        $customer_id = $row['Customer_ID'];
+                        $quantity = $row['Quantity'];
+                        $customer_name = $row['customer_firstname'] . ' ' . $row['customer_lastname'];
                         ?>
                         <tr>
                             <td><?php echo $id; ?></td>
-                            <td><?php echo $title; ?></td>
+                            <td><?php echo $item_name; ?></td>
+                            <td><?php echo $quantity; ?></td>
+                            <td><?php echo $total; ?></td>
+                            <td><?php echo $order_date; ?></td>
+                            <td><?php echo $status; ?></td>
+                            <td><?php echo $customer_name; ?></td>
                             <td>
-                                <?php
-                                if ($image_name != "") {
-                                    // Display the image
-                                    echo "<img src='" . HOMEURL . "images/category/$image_name' class='img-thumbnail'>";
-                                } else {
-                                    echo "<div style='color: red;'>Image Not Added</div>";
-                                }
-                                ?>
-                            </td>
-                            <td><?php echo $featured; ?></td>
-                            <td><?php echo $active; ?></td>
-                            <td>
-                                <a href="<?php echo HOMEURL; ?>admin/Update-category.php?ID=<?php echo $id; ?>" class="btn-secondary"><i class="fa-solid fa-pen"></i></a>
-                                <a href="<?php echo HOMEURL; ?>admin/Delete-category.php?ID=<?php echo $id; ?>" class="btn-danger"><i class="fa-regular fa-trash-can"></i></a>
-
+                                <!-- <a href="<?php echo HOMEURL; ?>admin/Update-category.php?ID=<?php echo $id; ?>" class="btn-secondary"><i class="fa-solid fa-pen"></i></a> -->
+                                <button onclick="updateOrder(<?php echo $id; ?>, 'Ready')" class="btn-grey"><i class="fa-solid fa-utensils"></i></button>
+                                <button onclick="updateOrder(<?php echo $id; ?>, 'Delivered')" class="btn-secondary " ><i class="fa-solid fa-check"></i></button>
+                                <button onclick="updateOrder(<?php echo $id; ?>, 'Cancelled')" class="btn-danger" "><i class="fa-solid fa-ban"></i></button>
                             </td>
                         </tr>
                         <?php
                     }
                 } else {
                     // No categories found
-                    echo "<tr><td colspan='6' style='color: red;'>No Categories Added Yet</td></tr>";
+                    echo "<tr><td colspan='6' style='color: red;'>No orders Yet</td></tr>";
                 }
             } else {
                 // Query failed
-                echo "<tr><td colspan='6' style='color: red;'>Failed to retrieve categories. Error: " . mysqli_error($conn) . "</td></tr>";
+                echo "<tr><td colspan='6' style='color: red;'>Failed to retrieve orders. Error: " . mysqli_error($conn) . "</td></tr>";
             }
             ?>
         </table>
     </div>
 </div>
+<script>
+        function updateTime() {
+            var now = new Date();
+            var hours = now.getHours().toString().padStart(2, '0');
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+            var timeString = "Current time: " + hours + ':' + minutes + ':' + seconds;
+            document.getElementById('clock').textContent = timeString;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
 
+    function updateOrder(orderId, action) {
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '<?php echo HOMEURL; ?>kitchen/updateOrder.php';
+
+        var orderIdInput = document.createElement('input');
+        orderIdInput.type = 'hidden';
+        orderIdInput.name = 'order_id';
+        orderIdInput.value = orderId;
+        form.appendChild(orderIdInput);
+
+        var actionInput = document.createElement('input');
+        actionInput.type = 'hidden';
+        actionInput.name = 'status';
+        actionInput.value = action;
+        form.appendChild(actionInput);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    const eventSource = new EventSource("sse_endpoint.php");
+
+        eventSource.onmessage = function (event) {
+            location.reload();
+        };
+
+        eventSource.onerror = function () {
+            console.error('Error connecting to the SSE server.');
+        };
+</script>
 <?php
 include("Partials/Footer.php");
 ?>

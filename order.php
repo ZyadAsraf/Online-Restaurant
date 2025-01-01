@@ -77,11 +77,12 @@ if (isset($_POST['submit'])) {
     $quantity = $_POST['quantity'];
     $total = $product['price'] * $quantity;
     $date = date('Y-m-d H:i:s');
-    $status = "pending";
+    $status = "Pending";
     $customer_id = $_POST['customer'];
-
+    include("kitchen/sse_function.php");
+    updateDatabaseAndNotifyClients();
     // Execute the Query
-    $sql2 = "INSERT INTO `order` SET
+    $sql2 = "INSERT INTO orders SET
                 Item_ID = '$item_id',
                 Quantity = '$quantity',
                 Total = '$total',
@@ -93,6 +94,7 @@ if (isset($_POST['submit'])) {
 
             if ($result2) {
                 $_SESSION['add'] = "<div style='color: green;'>Order placed Successfully.</div>";
+                
                 header("location:" . HOMEURL . "order.php?ID=$id");
             } else {
                 $_SESSION['add'] = "<div style='color: red;'>Failed to place order.</div>";
