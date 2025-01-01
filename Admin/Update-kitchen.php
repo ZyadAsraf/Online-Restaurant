@@ -2,7 +2,7 @@
 
 <div class="main-content">
     <div class="wrapper">
-        <h1>Edit-Admin</h1>
+        <h1>Edit-Staff</h1>
         <br><br>
 
         <?php

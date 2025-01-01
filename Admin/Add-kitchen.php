@@ -4,7 +4,7 @@ include("Partials/Navigation.php");
 
 <div class="main-content">
         <div class="wrapper">
-            <h1>Add-Admin</h1>
+            <h1>Add-staff</h1>
             <br><br>
 
             <form action="" method="POST">
@@ -26,9 +26,9 @@ include("Partials/Navigation.php");
                 </tr>
 
                 <tr>
-                    <td>Username:</td>
+                    <td>Phone:</td>
                     <td>
-                        <input type="text" name="username" placeholder="Enter Username: ">
+                        <input type="number" name="phone" placeholder="Enter Phone: ">
                     </td>
                 </tr>
 
@@ -71,15 +71,15 @@ if(isset($_POST['submit']))
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
-    $username = $_POST['username'];
+    $phone = $_POST['phone'];
     $password = md5($_POST['password']); // Password Encryption with MD5
 
 
     // SQL Query to Save the data into database
-    $sql = "INSERT INTO tbl_admin SET
+    $sql = "INSERT INTO kitchen SET
         First_Name = '$first_name',
         Last_Name = '$last_name',
-        User_Name = '$username',
+        Phone = '$phone',
         Email = '$email',
         Password = '$password'
 
@@ -95,20 +95,20 @@ if(isset($_POST['submit']))
     {
         // Data Inserted
         // Create a Session Variable to Display Message
-        $_SESSION['add'] = "<div style=\"color: green\"><strong>Admin Added Successfully</strong></div>";
+        $_SESSION['add'] = "<div style=\"color: green\"><strong>staff Added Successfully</strong></div>";
 
         // Redirect to Manage Admin Page
-        header("location:".HOMEURL.'admin/Manage-admin.php');
+        header("location:".HOMEURL.'admin/Manage-kitchen.php');
 
     }
     else
     {
         // Failed to Insert Data
         // Create a Session Variable to Display Message
-        $_SESSION['add'] = "Failed To Add Admin!";
+        $_SESSION['add'] = "Failed To Add staff!";
 
         // Redirect to Manage Admin Page
-        header("location:".HOMEURL.'admin/Add-admin.php');
+        header("location:".HOMEURL.'admin/Add-kitchen.php');
     }
 
 

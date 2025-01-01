@@ -19,11 +19,11 @@ $stmt->bind_param("si", $status, $order_id);
 
 if ($stmt->execute()) {
     $_SESSION['add'] = "<div style='color: green;'>Order updated successfully.</div>";
-    updateDatabaseAndNotifyClients();
     header("Location: myorders.php");
 } else {
     $_SESSION['add'] = "<div style='color: red;'>Failed to update order.</div>";
     header("Location: myorders.php");
+    
 }
 
 $stmt->close();

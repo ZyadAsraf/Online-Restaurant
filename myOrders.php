@@ -65,8 +65,8 @@ include('partials-front/navegation.php');
                         <?php
                         if ($status == "Pending") {
                             echo '<form method="POST" action="updateOrder.php">
-                            <input type="hidden" name="order_id" value="<?php echo $id; ?>">
-                            <input type="hidden" name="order_id" value="Cancelled">
+                            <input type="hidden" name="order_id" value="'.$id.'">
+                            <input type="hidden" name="status" value="Cancelled">
                             <input type="submit" value="Cancel order" class="btn btn-primary">
                         </form>';
                         }

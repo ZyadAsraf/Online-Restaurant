@@ -6,7 +6,7 @@ include('../config/Constant.php');
 $id = $_GET['ID'];
 
 //Create SQL Query to Delete Admin
-$sql = "DELETE FROM tbl_admin WHERE ID = $id";
+$sql = "DELETE FROM kitchen WHERE ID = $id";
 
 //Execute the Query
 $result = mysqli_query($conn, $sql);
@@ -18,14 +18,14 @@ if($result == TRUE){
     //Query Executed Successfully and Admin Deleted
     
     //Create Session Variable to Display Message
-    $_SESSION['delete'] = "<div style=\"color: green\"><strong>Admin Deleted Successfully</strong></div>";
+    $_SESSION['delete'] = "<div style=\"color: green\"><strong>Staff Deleted Successfully</strong></div>";
     //Redirect to Manage Admin Page
-    header('location:'.HOMEURL.'Admin/manage-admin.php');
+    header('location:'.HOMEURL.'Admin/manage-kitchen.php');
 }
 else{
     //Failed to Delete Admin
-    $_SESSION['delete'] = "<div style=\"color: red\">Faild to Delete Admin</div>";
-    header('location:'.HOMEURL.'Admin/manage-admin.php');
+    $_SESSION['delete'] = "<div style=\"color: red\">Faild to Delete staff</div>";
+    header('location:'.HOMEURL.'Admin/manage-kitchen.php');
 }
 
 
