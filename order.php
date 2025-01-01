@@ -54,7 +54,9 @@ if (isset($_GET['ID'])) {
                             <?php echo htmlspecialchars($product['description'])?>
                         <div class="order-label">Quantity</div>
                         <input type="number" name="quantity" class="input-responsive" value="1" required>
-                        
+                        <div class="order-label">Payment Type</div>
+                        <input type="radio" name="payment_type" value="Credit Card" required> Credit Card
+                        <input type="radio" name="payment_type" value="Cash" required> Cash
                     </div>
                     <input type="hidden" name="item_id" value="<?php echo $id; ?>" required>
                     <input type="hidden" name="customer" value="<?php echo $_SESSION['UID']; ?>" required>
@@ -79,6 +81,8 @@ if (isset($_POST['submit'])) {
     $date = date('Y-m-d H:i:s');
     $status = "Pending";
     $customer_id = $_POST['customer'];
+    $payment_type = $_POST['payment_type'];
+
     include("kitchen/sse_function.php");
     updateDatabaseAndNotifyClients();
     // Execute the Query
@@ -88,14 +92,15 @@ if (isset($_POST['submit'])) {
                 Total = '$total',
                 Order_Date = '$date',
                 Status = '$status',
-                Customer_ID = '$customer_id'";
+                Customer_ID = '$customer_id',
+                Payment_type = '$payment_type'";
 
             $result2 = mysqli_query($conn, $sql2);
 
             if ($result2) {
                 $_SESSION['add'] = "<div style='color: green;'>Order placed Successfully.</div>";
                 
-                header("location:" . HOMEURL . "order.php?ID=$id");
+                header("location:" . HOMEURL . "myOrders.php?");
             } else {
                 $_SESSION['add'] = "<div style='color: red;'>Failed to place order.</div>";
                 header("location:" . HOMEURL . "order.php?ID=$id");

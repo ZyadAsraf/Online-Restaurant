@@ -41,6 +41,8 @@
         <br><br>
         <input type="submit" name="submit" value="Login">
         </form>
+        <br><br>
+        <p>Already have an account? <a href="login.php">Login</a></p>
     </div>
 </body>
 </html>

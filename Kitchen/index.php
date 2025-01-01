@@ -89,6 +89,7 @@ include("Partials/Navigation.php");
                 <th>Order Date</th>
                 <th>Status</th>
                 <th>Customer Name</th>
+                <th>Payment type</th>
                 <th>Actions</th>
             </tr>
 
@@ -118,6 +119,7 @@ include("Partials/Navigation.php");
                         $order_date = $row['Order_Date'];
                         $status = $row['Status'];
                         $quantity = $row['Quantity'];
+                        $payment_type = $row['Payment_type'];
                         $customer_name = $row['customer_firstname'] . ' ' . $row['customer_lastname'];
                         ?>
                         <tr>
@@ -128,6 +130,7 @@ include("Partials/Navigation.php");
                             <td><?php echo $order_date; ?></td>
                             <td><?php echo $status; ?></td>
                             <td><?php echo $customer_name; ?></td>
+                            <td><?php echo $payment_type; ?></td>
                             <td>
                                 <!-- <a href="<?php echo HOMEURL; ?>admin/Update-category.php?ID=<?php echo $id; ?>" class="btn-secondary"><i class="fa-solid fa-pen"></i></a> -->
                                 <button onclick="updateOrder(<?php echo $id; ?>, 'Ready')" class="btn-grey"><i class="fa-solid fa-utensils"></i></button>

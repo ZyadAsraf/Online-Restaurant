@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login-Page</title>
-    <link rel="stylesheet" href="../CSS/Admin.css">
+    <link rel="stylesheet" href="CSS/Login.css">
 </head>
 <body>
 
@@ -35,6 +35,8 @@
         <br><br>
         <input type="submit" name="submit" value="Login">
         </form>
+        <br><br>
+        <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
     </div>
 </body>
 </html>
