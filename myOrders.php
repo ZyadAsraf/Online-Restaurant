@@ -53,13 +53,24 @@ include('partials-front/navegation.php');
                         <p class="food-price">$<?php echo $price; ?></p>
                         <p class="food-detail"><?php echo "Quantity: ".$quantity; ?></p>
                         <?php if ($status == "Ready") {
-                            echo "<p class="food-detail" style="color: green;"><?php echo $status; ?></p>"
-                        <?php } else { ?>
-                            <p class="food-detail"><?php echo $status; ?></p>
+                            echo '<p class="food-detail" style="color: green;"> Ready For pickup</p>';
+                        }else if ($status == "Cancelled"){
+                            echo '<p class="food-detail" style="color: red;">'.$status.'</p>';
+                        }else if ($status == "Delivered"){
+                            echo '<p class="food-detail"">'.$status.'</p>';
+                        }else {
+                            echo '<p class="food-detail" style="color: blue;">'. $status .'</p>';
                         }?>
                         <br>
-
-                        <a href="order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
+                        <?php
+                        if ($status == "Pending") {
+                            echo '<form method="POST" action="updateOrder.php">
+                            <input type="hidden" name="order_id" value="<?php echo $id; ?>">
+                            <input type="hidden" name="order_id" value="Cancelled">
+                            <input type="submit" value="Cancel order" class="btn btn-primary">
+                        </form>';
+                        }
+                        ?>
                     </div>
                 </div>
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up Page</title>
-    <link rel="stylesheet" href="../CSS/Admin.css">
+    <link rel="stylesheet" href="CSS/Login.css">
 </head>
 <body>
 
@@ -27,16 +27,16 @@
         <br>
 
         <form action="" method="POST">
-        First name: <br>
-        <input type="text" name="first_name" placeholder="Enter first name">
-        Last name: <br>
-        <input type="text" name="last_name" placeholder="Enter last name">
-        E-mail: <br>
-        <input type="text" name="email" placeholder="Enter E-mail">
-        Phone number <br>
+        First name:
+        <input type="text" name="first_name" placeholder="Enter first name"><br><br>
+        Last name:
+        <input type="text" name="last_name" placeholder="Enter last name"><br><br>
+        E-mail:
+        <input type="text" name="email" placeholder="Enter E-mail"><br><br>
+        Phone number 
         <input type="number" name="phone" placeholder="Enter number">
         <br><br>
-        Password:<br>
+        Password:
         <input type="password" name="password" placeholder="Enter Password">
         <br><br>
         <input type="submit" name="submit" value="Login">
@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
     $password = md5($_POST['password']); // Password Encryption with MD5
 
     // SQL Query to check if the user email and password exists or not
-    $sql = "INSERT INTO tbl_admin SET
+    $sql = "INSERT INTO customer SET
         First_Name = '$first_name',
         Last_Name = '$last_name',
         Phone = '$phone',
@@ -69,16 +69,24 @@ if (isset($_POST['submit'])) {
     // Execute the Query
     $result = mysqli_query($conn, $sql);
 
-    // Count rows to check if the user exists or not
-    $count = mysqli_num_rows($result);
+    if($result == TRUE)
+    {
+        // Data Inserted
+        // Create a Session Variable to Display Message
+        $_SESSION['add'] = "<div style=\"color: green\"><strong>Welcome!</strong></div>";
 
-    if ($count == 1) {
-        // Fetch the user data
-
-        header("location:".HOMEURL.'index.php');
-    } else {
-        $_SESSION['login'] = "<div style='color: red;'><h3><strong>E-mail or Password is incorrect!</strong></h3></div>";
+        // Redirect to Manage Admin Page
         header("location:".HOMEURL.'login.php');
+
+    }
+    else
+    {
+        // Failed to Insert Data
+        // Create a Session Variable to Display Message
+        $_SESSION['add'] = "Failed To sign up!";
+
+        // Redirect to Manage Admin Page
+        header("location:".HOMEURL.'signUp.php');
     }
 }
 

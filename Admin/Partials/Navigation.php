@@ -20,7 +20,7 @@ include("Login-Check.php");
                 <li><a href="Manage-admin.php">Admin</a></li>
                 <li><a href="Manage-category.php">Category</a></li>
                 <li><a href="Manage-food.php">Food</a></li>
-                <li><a href="#">Order</a></li>
+                <li><a href="Manage-kitchen.php">Kitchen staff</a></li>
                 <li><a href="Logout.php">Log-Out</a></li>
             </ul>
         </div>

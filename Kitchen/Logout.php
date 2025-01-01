@@ -1,6 +1,6 @@
 <?php
 //Include Constants Page
-include('Config/Constant.php');
+include('../Config/Constant.php');
 
 //Destory the Session
 session_destroy();
