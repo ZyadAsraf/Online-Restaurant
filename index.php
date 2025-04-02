@@ -21,7 +21,7 @@ include('partials-front/navegation.php');
                     $image_name = $row['Image'];
                     ?>
 
-                    <a href="category-foods.html">
+                    <a href="categories.php">
                         <div class="box-3 float-container">
                             <?php
                             if ($image_name == "") {

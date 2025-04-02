@@ -5,7 +5,7 @@ include("Partials/Navigation.php");
 
     <div class="main-content">
         <div class="wrapper">
-            <h1>Manage-Admins</h1>
+            <h1>Manage Kichen Staff</h1>
             <br>
 
             <?php
@@ -56,7 +56,7 @@ include("Partials/Navigation.php");
 
 
 
-            <a href="Add-admin.php" class="btn-success">Add Admin</a>
+            <a href="Add-kitchen.php" class="btn-success">Add Staff</a>
 
 
             <table class="tbl-full">
@@ -101,7 +101,7 @@ include("Partials/Navigation.php");
                             <tr>
                                 <td><?php echo($sn++) ?></td>
                                 <td><?php echo($first_name." ".$last_name) ?></td>
-                                <td><?php echo($username) ?></td>
+                                <td><?php echo($phone) ?></td>
                                 <td><?php echo($email) ?></td> 
                                 <td>
                                 <a href="<?php echo HOMEURL; ?>Admin/Update-Password-kitchen.php?ID=<?php echo $id;?>" class="btn-grey"><i class="fa-solid fa-key" style="color: #FFD43B;"></i></a>
