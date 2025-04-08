@@ -1,12 +1,12 @@
 <?php
 include('partials-front/navegation.php');
+include("partials-front/Login-Check.php");
 ?>
-
 <!-- Food Menu Section Starts Here -->
 <section class="food-menu">
     <div class="container">
         <h2 class="text-center">My orders</h2>
-
+        
         <?php
         // Database connection (assuming $conn is already initialized)
         $sql = "SELECT orders.*, customer.First_Name AS customer_firstname, customer.Last_Name AS customer_lastname, item.title AS item_name, item.Image AS image_name

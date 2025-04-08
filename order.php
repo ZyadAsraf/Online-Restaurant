@@ -58,7 +58,7 @@ if (isset($_GET['ID'])) {
                         <input type="radio" name="payment_type" value="Credit Card" required> Credit Card
                         <input type="radio" name="payment_type" value="Cash" required> Cash
                     </div>
-                    <input type="hidden" name="item_id" value="<?php echo $id; ?>" required>
+                    <input type="hidden" name="item_id" value="<?php echo isset($id) ? $id : 'none'; ?>" required>
                     <input type="hidden" name="customer" value="<?php echo $_SESSION['UID']; ?>" required>
                     <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary">
                 </fieldset>

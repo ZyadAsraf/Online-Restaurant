@@ -46,7 +46,7 @@ include('partials-front/navegation.php');
                         <p class="food-detail"><?php echo $description; ?></p>
                         <br>
 
-                        <a href="order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
+                        <a href="<?php echo HOMEURL; ?>order.php?ID=<?php echo $id;?>" class="btn btn-primary">Order Now</a>
                     </div>
                 </div>
 

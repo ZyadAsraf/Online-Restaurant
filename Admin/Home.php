@@ -10,7 +10,7 @@ include("Partials/Navigation.php");
                 echo $_SESSION['login'];
                 unset($_SESSION['login']);
             }
-        ?>
+            ?>
         <br><br>
         </div>
         <div class="col-4 text-center">
