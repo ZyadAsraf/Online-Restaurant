@@ -45,29 +45,45 @@
 if (isset($_POST['submit'])) {
     
     // Get the data from the form
-    $email = $_POST['email'];
-    $password = md5($_POST['password']);
+    $email = trim($_POST['email']);
+    $password_raw = $_POST['password'];
 
-    // SQL Query to check if the user email and password exists or not
-    $sql = "SELECT * FROM tbl_admin WHERE Email = '$email' AND Password = '$password'";
+    // Check for empty fields
+    if (empty($email) || empty($password_raw)) {
+        $_SESSION['login'] = "<div style='color: red;'><h3><strong>Please Enter Your Email And Password!</strong></h3></div>";
+        header("location:" . HOMEURL . 'admin/Login.php');
+        exit();
+    }
 
-    // Execute the Query
-    $result = mysqli_query($conn, $sql);
+    // Hash the password after checking for empty
+    $password = md5($password_raw);
 
-    // Count rows to check if the user exists or not
-    $count = mysqli_num_rows($result);
+    // Check if the email exists
+    $email_check_sql = "SELECT * FROM tbl_admin WHERE Email = '$email'";
+    $email_result = mysqli_query($conn, $email_check_sql);
 
-    if ($count == 1) {
-        $_SESSION['login'] = "<div style='color: green;'><h2><strong>Welcome Back!</h2></strong></div>";
-        
-        $_SESSION['email'] = $email; // To check whether the user is logged in or not and logout will unset it
-        $_SESSION['UID'] = $row['ID'];
-        $_SESSION['role'] = "admin"; // Set the user role
-        header("location:".HOMEURL.'admin/');
+    if (mysqli_num_rows($email_result) == 1) {
+        // Email exists, now check the password
+        $row = mysqli_fetch_assoc($email_result); // Fetch user data
+        if ($row['Password'] == $password) {
+            // Email and password match
+            $_SESSION['login'] = "<div style='color: green;'><h2><strong>Welcome Back!</strong></h2></div>";
+            $_SESSION['email'] = $email;
+            $_SESSION['UID'] = $row['ID'];
+            $_SESSION['role'] = "admin";
+            header("location:" . HOMEURL . 'admin/');
+            exit();
+        } else {
+            // Password incorrect
+            $_SESSION['login'] = "<div style='color: red;'><h3><strong>Incorrect Password!</strong></h3></div>";
+            header("location:" . HOMEURL . 'admin/Login.php');
+            exit();
+        }
     } else {
-        $_SESSION['login'] = "<div style='color: red;'><h3><strong>E-mail or Password is incorrect!</strong></h3></div>";
-        header("location:".HOMEURL.'admin/Login.php');
+        // Email doesn't exist
+        $_SESSION['login'] = "<div style='color: red;'><h3><strong>User Not Found!</strong></h3></div>";
+        header("location:" . HOMEURL . 'admin/Login.php');
+        exit();
     }
 }
-
 ?>
